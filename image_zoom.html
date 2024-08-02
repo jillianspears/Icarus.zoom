@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designated Area Zoom</title>
+    <style>
+        #image {
+            width: 1600px;
+            height: auto;
+            position: relative;
+            display: block;
+        }
+        #NoseCone {
+            position: absolute;
+            top: 50px;  /* Adjust according to your needs */
+            left: 850px; /* Adjust according to your needs */
+            width: 80px; /* Adjust according to your needs */
+            height: 200px; /* Adjust according to your needs */
+            border: 2px dashed #ff0000;
+            cursor: crosshair;
+        }
+        #zoomedInViewContainer {
+            position: fixed;
+            top: 20px; /* Adjust according to your needs */
+            left: 20px; /* Adjust according to your needs */
+            display: none;
+            flex-direction: column;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+        }
+        #zoomedInView {
+            width: 450px; /* Adjust size to fit the enlarged view */
+            height: 750px; /* Adjust size to fit the enlarged view */
+            background-size: auto;
+            background-repeat: no-repeat;
+        }
+        #zoomText {
+            margin-top: 10px;
+            font-size: 14px;
+            width: 450px;
+            height: auto;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative;">
+        <img id="image" src="icarus cad.JPG" alt="Zoomable Image">
+        <div id="NoseCone"></div>
+    </div>
+    <div id="zoomedInViewContainer">
+        <div id="zoomedInView"></div>
+        <div id="zoomText">The Nose Cone and Separation Recovery System ...</div>
+    </div>
+
+    <script>
+        const image = document.getElementById('image');
+        const NoseCone = document.getElementById('NoseCone');
+        const zoomedInViewContainer = document.getElementById('zoomedInViewContainer');
+        const zoomedInView = document.getElementById('zoomedInView');
+        const zoomText = document.getElementById('zoomText');
+
+        const noseConeTop = 50;  // NC AND SEPREC
+        const noseConeLeft = 850; // NC AND SEPREC
+        const noseConeWidth = 80; // Adjust according to your needs
+        const noseConeHeight = 200; // Adjust according to your needs
+
+        NoseCone.addEventListener('click', function(event) {
+            const scale = 3; // Scale factor for the zoomed-in view
+
+            zoomedInView.style.backgroundImage = `url(${image.src})`;
+            zoomedInView.style.backgroundSize = `${image.width * scale}px auto`;
+
+            // Adjust the background position to focus on the nose cone area
+            const offsetX = noseConeLeft * scale;
+            const offsetY = noseConeTop * scale;
+            zoomedInView.style.backgroundPosition = `-${offsetX}px -${offsetY}px`;
+
+            zoomedInViewContainer.style.display = 'flex';
+        });
+
+        // Hide the zoomed view and text when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!NoseCone.contains(event.target) && !zoomedInViewContainer.contains(event.target)) {
+                zoomedInViewContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
