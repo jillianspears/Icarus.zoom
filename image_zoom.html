@@ -11,28 +11,45 @@
             position: relative;
             display: block;
         }
-        #NoseCone {
+        .zoomable {
             position: absolute;
-            top: 50px;  /* Adjust according to your needs */
-            left: 850px; /* Adjust according to your needs */
-            width: 80px; /* Adjust according to your needs */
-            height: 200px; /* Adjust according to your needs */
-            border: 2px dashed #ff0000;
+            border: 2px dashed;
             cursor: crosshair;
+        }
+        #NoseCone {
+            top: 50px;
+            left: 850px;
+            width: 80px;
+            height: 180px;
+            border-color: #ff0000;
+        }
+        #SepRec {
+            top: 230px;
+            left: 850px;
+            width: 80px;
+            height: 50px;
+            border-color: #ff7700;
+        }
+        #AvBay {
+            top: 280px;
+            left: 850px;
+            width: 80px;
+            height: 100px;
+            border-color: #ffea00
         }
         #zoomedInViewContainer {
             position: fixed;
-            top: 20px; /* Adjust according to your needs */
-            left: 20px; /* Adjust according to your needs */
+            top: 80px;
+            left: 20px;
             display: none;
             flex-direction: column;
             background-color: white;
             padding: 5px;
-            box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         #zoomedInView {
-            width: 450px; /* Adjust size to fit the enlarged view */
-            height: 750px; /* Adjust size to fit the enlarged view */
+            width: 500px;
+            height: 650px;
             background-size: auto;
             background-repeat: no-repeat;
         }
@@ -49,43 +66,54 @@
 </head>
 <body>
     <div style="position: relative;">
-        <img id="image" src="icarus cad.JPG" alt="Zoomable Image">
-        <div id="NoseCone"></div>
+        <img id="image" src="https://imgur.com/kswKEpC.jpg" alt="Zoomable Image">
+        <div id="NoseCone" class="zoomable"></div>
+        <div id="SepRec" class="zoomable"></div>
+        <div id="AvBay" class="zoomable"></div>
     </div>
     <div id="zoomedInViewContainer">
         <div id="zoomedInView"></div>
-        <div id="zoomText">The Nose Cone and Separation Recovery System ...</div>
+        <div id="zoomText">The Nose Cone is composed of fiberglass and a steel tip.</div>
     </div>
 
     <script>
         const image = document.getElementById('image');
-        const NoseCone = document.getElementById('NoseCone');
         const zoomedInViewContainer = document.getElementById('zoomedInViewContainer');
         const zoomedInView = document.getElementById('zoomedInView');
         const zoomText = document.getElementById('zoomText');
 
-        const noseConeTop = 50;  // NC AND SEPREC
-        const noseConeLeft = 850; // NC AND SEPREC
-        const noseConeWidth = 80; // Adjust according to your needs
-        const noseConeHeight = 200; // Adjust according to your needs
+        const avBayImageUrl = 'https://imgur.com/dkUN9Lp.jpg';
 
-        NoseCone.addEventListener('click', function(event) {
-            const scale = 3; // Scale factor for the zoomed-in view
+        const zoomAreas = [
+            { id: 'NoseCone', top: 50, left: 850, width: 80, height: 200, text: 'The Nose Cone is composed of fiberglass and a steel tip.' },
+            { id: 'SepRec', top: 250, left: 850, width: 80, height: 80, text: 'Separation and recovery system uses the dual deployment method of a drogue shoot released at apogee and a main chute released short after.' },
+            { id: 'AvBay', top: 280, left: 850, width: 80, height: 100, text: 'The Avionics Bay houses the Daedulus flight computer and GPS. It can be easily opened to debug any electric issues.', isAvBay: true}
+        ];
 
-            zoomedInView.style.backgroundImage = `url(${image.src})`;
-            zoomedInView.style.backgroundSize = `${image.width * scale}px auto`;
+        const scale = 3;
 
-            // Adjust the background position to focus on the nose cone area
-            const offsetX = noseConeLeft * scale;
-            const offsetY = noseConeTop * scale;
-            zoomedInView.style.backgroundPosition = `-${offsetX}px -${offsetY}px`;
+        zoomAreas.forEach(area => {
+            const element = document.getElementById(area.id);
+            element.addEventListener('click', function(event) {
+                if (area.isAvBay) {
+                    zoomedInView.style.backgroundImage = `url(${avBayImageUrl})`;
+                    zoomedInView.style.backgroundSize = 'contain';
+                    zoomedInView.style.backgroundPosition = 'center';
+                } else {
+                    zoomedInView.style.backgroundImage = `url(${image.src})`;
+                    zoomedInView.style.backgroundSize = `${image.width * scale}px auto`;
 
-            zoomedInViewContainer.style.display = 'flex';
+                    const offsetX = area.left * scale;
+                    const offsetY = area.top * scale;
+                    zoomedInView.style.backgroundPosition = `-${offsetX}px -${offsetY}px`;
+                }
+                zoomText.textContent = area.text;
+                zoomedInViewContainer.style.display = 'flex';
+            });
         });
 
-        // Hide the zoomed view and text when clicking outside
         document.addEventListener('click', function(event) {
-            if (!NoseCone.contains(event.target) && !zoomedInViewContainer.contains(event.target)) {
+            if (![...zoomAreas.map(area => document.getElementById(area.id)), zoomedInViewContainer].some(el => el.contains(event.target))) {
                 zoomedInViewContainer.style.display = 'none';
             }
         });
