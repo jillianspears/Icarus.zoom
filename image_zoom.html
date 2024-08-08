@@ -34,8 +34,36 @@
             top: 280px;
             left: 850px;
             width: 80px;
-            height: 100px;
+            height: 50px;
             border-color: #ffea00
+        }
+        #Intertank {
+            top: 490px;
+            left: 850px;
+            width: 80px;
+            height: 50px;
+            border-color:#05ad24
+        }
+        #TSA{
+            top: 725px;
+            left: 870px;
+            width: 40px;
+            height: 125px;
+            border-color: #2251d2;
+        }
+        #FinCan{
+            top: 800px;
+            left: 830px ;
+            width: 40px;
+            height: 50px;
+            border-color: #7805ad;
+        }
+        #FinCan1{
+            top: 800px;
+            left: 900px;
+            width: 40px;
+            height: 50px;
+            border-color: #7805ad;
         }
         #zoomedInViewContainer {
             position: fixed;
@@ -45,7 +73,6 @@
             flex-direction: column;
             background-color: white;
             padding: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
         #zoomedInView {
             width: 500px;
@@ -58,9 +85,9 @@
             font-size: 14px;
             width: 450px;
             height: auto;
-            background-color: white;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0,0,0);
             padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -70,6 +97,10 @@
         <div id="NoseCone" class="zoomable"></div>
         <div id="SepRec" class="zoomable"></div>
         <div id="AvBay" class="zoomable"></div>
+        <div id="Intertank" class="zoomable"></div>
+        <div id="TSA" class="zoomable"></div>
+        <div id="FinCan" class="zoomable"></div>
+        <div id="FinCan1" class="zoomable"></div>
     </div>
     <div id="zoomedInViewContainer">
         <div id="zoomedInView"></div>
@@ -82,12 +113,20 @@
         const zoomedInView = document.getElementById('zoomedInView');
         const zoomText = document.getElementById('zoomText');
 
+        // PICTURES OF ASSEMBLIES
         const avBayImageUrl = 'https://imgur.com/dkUN9Lp.jpg';
+        const IntertankPicUrl = 'https://imgur.com/hXlwZ7v.jpg';
+        const TSAPicUrl = 'https://imgur.com/LCGdOK7.jpg';
+        const FinCanUrl = 'https://imgur.com/ir8C1V9.jpg';
 
         const zoomAreas = [
             { id: 'NoseCone', top: 50, left: 850, width: 80, height: 200, text: 'The Nose Cone is composed of fiberglass and a steel tip.' },
             { id: 'SepRec', top: 250, left: 850, width: 80, height: 80, text: 'Separation and recovery system uses the dual deployment method of a drogue shoot released at apogee and a main chute released short after.' },
-            { id: 'AvBay', top: 280, left: 850, width: 80, height: 100, text: 'The Avionics Bay houses the Daedulus flight computer and GPS. It can be easily opened to debug any electric issues.', isAvBay: true}
+            { id: 'AvBay', top: 280, left: 850, width: 80, height: 100, text: 'The Avionics Bay houses the Daedulus flight computer and GPS. It can be easily opened to debug any electric issues.', isAvBay: true},
+            { id: 'Intertank', top: 480, left: 850, width: 80, height: 50, text: 'The intertank is the critical connection point between the top and bottom halves of Icarus. It is designed to house both oxidizer and fuel fluid systems.', isIntertank: true},
+            { id: 'TSA', top: 725, left: 850, width: 80, height: 80, text: 'The thrust structure assembly (TSA) evenly distributes loads from the engine to the rest of the rocket. The TSA is expected to withstand 2500 lbf of nominal thrust, the aerodynamic loading from the fins during flight, and a 3000 lbf engine startup transient.', isTSA: true},
+            { id: 'FinCan', text: 'Icarus utilizes four fins to maintain passive stability throughout its flight. The fin can provides a way to mount Icarus’ fins and maintain stability throughout its varied propulsion', isFinCan: true},
+            { id: 'FinCan1', text: 'Icarus utilizes four fins to maintain passive stability throughout its flight. The fin can provides a way to mount Icarus’ fins and maintain stability throughout its varied propulsion', isFinCan1: true}
         ];
 
         const scale = 3;
@@ -99,7 +138,28 @@
                     zoomedInView.style.backgroundImage = `url(${avBayImageUrl})`;
                     zoomedInView.style.backgroundSize = 'contain';
                     zoomedInView.style.backgroundPosition = 'center';
-                } else {
+                } 
+                else if (area.isIntertank) {
+                    zoomedInView.style.backgroundImage = `url(${IntertankPicUrl})`;
+                    zoomedInView.style.backgroundSize = 'contain';
+                    zoomedInView.style.backgroundPosition = 'center';
+                }
+                else if (area.isTSA) {
+                    zoomedInView.style.backgroundImage = `url(${TSAPicUrl})`;
+                    zoomedInView.style.backgroundSize = 'contain';
+                    zoomedInView.style.backgroundPosition = 'center';
+                }
+                else if (area.isFinCan) {
+                    zoomedInView.style.backgroundImage = `url(${FinCanUrl})`;
+                    zoomedInView.style.backgroundSize = 'contain';
+                    zoomedInView.style.backgroundPosition = 'center';
+                }
+                else if (area.isFinCan1) {
+                    zoomedInView.style.backgroundImage = `url(${FinCanUrl})`;
+                    zoomedInView.style.backgroundSize = 'contain';
+                    zoomedInView.style.backgroundPosition = 'center';
+                }
+                else {
                     zoomedInView.style.backgroundImage = `url(${image.src})`;
                     zoomedInView.style.backgroundSize = `${image.width * scale}px auto`;
 
