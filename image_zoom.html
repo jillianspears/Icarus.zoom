@@ -119,6 +119,7 @@
         const TSAPicUrl = 'https://imgur.com/LCGdOK7.jpg';
         const FinCanUrl = 'https://imgur.com/ir8C1V9.jpg';
 
+        // CAPTIONS ARE DIRECTLY FROM NEWSLETTER
         const zoomAreas = [
             { id: 'NoseCone', top: 50, left: 850, width: 80, height: 200, text: 'The Nose Cone is composed of fiberglass and a steel tip.' },
             { id: 'SepRec', top: 250, left: 850, width: 80, height: 80, text: 'Separation and recovery system uses the dual deployment method of a drogue shoot released at apogee and a main chute released short after.' },
@@ -131,6 +132,7 @@
 
         const scale = 3;
 
+        // when user clicks on designated area, the above properties should be correctly displayed       
         zoomAreas.forEach(area => {
             const element = document.getElementById(area.id);
             element.addEventListener('click', function(event) {
@@ -171,7 +173,8 @@
                 zoomedInViewContainer.style.display = 'flex';
             });
         });
-
+        
+        // when user click out of zoomed in area it'll disapear
         document.addEventListener('click', function(event) {
             if (![...zoomAreas.map(area => document.getElementById(area.id)), zoomedInViewContainer].some(el => el.contains(event.target))) {
                 zoomedInViewContainer.style.display = 'none';
