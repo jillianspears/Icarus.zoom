@@ -1,11 +1,17 @@
-<div style="position: relative; height: 500vh; color: white; font-family: sans-serif;">
-  <div style="position: sticky; top: 40%; text-align: center; font-size: 2em;" id="scroll-text">
+<div style="height: 500vh; position: relative;">
+  <div id="scroll-text" style="
+    position: sticky;
+    top: 40%;
+    font-size: 2em;
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+    z-index: 999;">
     Welcome
   </div>
 </div>
 
 <script>
-  const text = document.getElementById('scroll-text');
   const phrases = [
     "Welcome",
     "We Design & Fly Rockets",
@@ -13,12 +19,13 @@
     "10 Major Projects",
     "Work With Us"
   ];
-  const changeInterval = window.innerHeight;
+  const text = document.getElementById("scroll-text");
+  const sectionHeight = window.innerHeight;
 
-  window.addEventListener('scroll', () => {
+  window.addEventListener("scroll", () => {
     const index = Math.min(
       phrases.length - 1,
-      Math.floor(window.scrollY / changeInterval)
+      Math.floor(window.scrollY / sectionHeight)
     );
     text.textContent = phrases[index];
   });
