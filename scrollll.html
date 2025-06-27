@@ -1,11 +1,19 @@
-<div style="position: relative; background: url('https://example.com/your-image.jpg') center/cover fixed; height: 100vh; overflow: hidden; color: white; font-family: sans-serif;">
-  <div style="position: sticky; top: 40%; transform: translateY(-50%); text-align: center; font-size: 2em;" id="scroll-text">Welcome</div>
+<div style="position: relative; height: 500vh; color: white; font-family: sans-serif;">
+  <div style="position: sticky; top: 40%; text-align: center; font-size: 2em;" id="scroll-text">
+    Welcome
+  </div>
 </div>
 
 <script>
   const text = document.getElementById('scroll-text');
-  const phrases = ["Welcome", "We Design & Fly Rockets", "700+ Miles of Property", "10 Major Projects", "Work With Us"];
-  const changeInterval = window.innerHeight / phrases.length;
+  const phrases = [
+    "Welcome",
+    "We Design & Fly Rockets",
+    "700+ Miles of Property",
+    "10 Major Projects",
+    "Work With Us"
+  ];
+  const changeInterval = window.innerHeight;
 
   window.addEventListener('scroll', () => {
     const index = Math.min(
