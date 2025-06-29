@@ -1,32 +1,109 @@
-<div style="height: 500vh; position: relative;">
-  <div id="scroll-text" style="
-    position: sticky;
-    top: 40%;
-    font-size: 2em;
-    text-align: center;
-    color: white;
-    font-family: sans-serif;
-    z-index: 999;">
-    Welcome
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .section {
+      padding: 50px 20px;
+    }
+
+    .motor-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .motor {
+      position: relative;
+      display: inline-block;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .motor img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid whitesmoke;
+      transform: translate(-50%, -50%);
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      white-space: nowrap;
+      transform: translate(-50%, -120%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .dot:hover .tooltip {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="section">Motor Types</h1>
+
+  <div class="motor-container">
+
+    <!-- Hybrid Motor -->
+    <div class="motor">
+      <img src="backseat.jpg" alt="Hybrid Motor">
+      <div class="dot" style="top: 30%; left: 40%;">
+        <div class="tooltip">Oxidizer tank here</div>
+      </div>
+      <div class="dot" style="top: 60%; left: 70%;">
+        <div class="tooltip">Fuel grain core</div>
+      </div>
+    </div>
+
+    <!-- Solid Motor -->
+    <div class="motor">
+      <img src="FaceBackground.jpg" alt="Solid Motor">
+      <div class="dot" style="top: 25%; left: 50%;">
+        <div class="tooltip">Igniter located here</div>
+      </div>
+      <div class="dot" style="top: 70%; left: 40%;">
+        <div class="tooltip">Burning surface shape</div>
+      </div>
+    </div>
+
+    <!-- Bunker Bleeder -->
+    <div class="motor">
+      <img src="seprec.JPG" alt="Bunker Bleeder">
+      <div class="dot" style="top: 35%; left: 60%;">
+        <div class="tooltip">Bleeder valve</div>
+      </div>
+      <div class="dot" style="top: 80%; left: 30%;">
+        <div class="tooltip">Pressure chamber</div>
+      </div>
+    </div>
+
   </div>
-</div>
 
-<script>
-  const phrases = [
-    "Welcome",
-    "We Design & Fly Rockets",
-    "700+ Miles of Property",
-    "10 Major Projects",
-    "Work With Us"
-  ];
-  const text = document.getElementById("scroll-text");
-  const sectionHeight = window.innerHeight;
-
-  window.addEventListener("scroll", () => {
-    const index = Math.min(
-      phrases.length - 1,
-      Math.floor(window.scrollY / sectionHeight)
-    );
-    text.textContent = phrases[index];
-  });
-</script>
+</body>
