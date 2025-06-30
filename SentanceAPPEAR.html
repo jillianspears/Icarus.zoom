@@ -1,0 +1,34 @@
+<style>
+  .scroll-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+  }
+
+  .scroll-text.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<div class="scroll-text">first </div>
+<div class="scroll-text">second</div>
+<div class="scroll-text">third</div>
+
+<script>
+  function revealOnScroll() {
+    const elements = document.querySelectorAll('.scroll-text');
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      if (elementTop < windowHeight - 100) {
+        el.classList.add('show');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
