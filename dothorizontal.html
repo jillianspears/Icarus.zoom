@@ -1,0 +1,73 @@
+<style>
+.scroll-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 20px 0;
+  background: #000;
+  position: relative;
+}
+
+.blueprint-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.blueprint-image {
+  display: block;
+  max-height: 100%;
+  max-width: none;
+}
+
+.dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  transform: translate(-50%, -140%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.dot:hover .tooltip {
+  opacity: 1;
+}
+</style>
+
+<div class="scroll-wrapper">
+  <div class="blueprint-wrapper">
+    <img class="blueprint-image" src="https://s3.amazonaws.com/chat.openai.com/user-uploads/c4d52e4e-e436-4a45-b9a6-a4a3e4decaee/file-MCKK3mEUQ3aZULQ5x5XhT3.png" alt="Rocket Blueprint">
+
+    <!-- Nozzle -->
+    <div class="dot" style="top: 50%; left: 2%;">
+      <div class="tooltip">Nozzle</div>
+    </div>
+
+    <!-- Casing -->
+    <div class="dot" style="top: 20%; left: 50%;">
+      <div class="tooltip">Casing</div>
+    </div>
+
+    <!-- Propellant -->
+    <div class="dot" style="top: 50%; left: 75%;">
+      <div class="tooltip">Propellant</div>
+    </div>
+  </div>
+</div>
