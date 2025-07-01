@@ -1,0 +1,89 @@
+<style>
+.scroll-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.motor-container {
+  display: inline-flex;
+  gap: 50px;
+  padding: 40px;
+}
+.motor {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  position: relative;
+  width: 400px;
+}
+.motor img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+.dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid whitesmoke;
+  transform: translate(-50%, -50%);
+}
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  transform: translate(-50%, -120%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.dot:hover .tooltip {
+  opacity: 1;
+}
+</style>
+
+<div class="scroll-wrapper">
+  <div class="motor-container">
+
+    <!-- Hybrid Motor -->
+    <div class="motor">
+      <img src="https://images.squarespace-cdn.com/content/685450ef61dfdb5e50343387/1750871422807-PP0859J4JA5HKK1X26P2/websiteblogpost1.jpg?content-type=image%2Fjpeg.jpg" alt="Hybrid Motor">
+      <div class="dot" style="top: 30%; left: 40%;">
+        <div class="tooltip">Oxidizer tank here</div>
+      </div>
+      <div class="dot" style="top: 60%; left: 70%;">
+        <div class="tooltip">Fuel grain core</div>
+      </div>
+    </div>
+
+    <!-- Solid Motor -->
+    <div class="motor">
+      <img src="https://images.squarespace-cdn.com/content/685450ef61dfdb5e50343387/6906280c-ca91-442b-8d44-f3fa2bdeddbe/Cover+Image-Photoroom+2.png?content-type=image%2Fpng" alt="Solid Motor">
+      <div class="dot" style="top: 25%; left: 50%;">
+        <div class="tooltip">Igniter located here</div>
+      </div>
+      <div class="dot" style="top: 70%; left: 40%;">
+        <div class="tooltip">Burning surface shape</div>
+      </div>
+    </div>
+
+    <!-- Bunker Bleeder -->
+    <div class="motor">
+      <img src="https://images.squarespace-cdn.com/content/685450ef61dfdb5e50343387/07d0a944-8d5a-4034-823c-b14d6cd74568/MLS+1.JPG?content-type=image%2Fjpeg" alt="Bunker Bleeder">
+      <div class="dot" style="top: 35%; left: 60%;">
+        <div class="tooltip">Bleeder valve</div>
+      </div>
+      <div class="dot" style="top: 80%; left: 30%;">
+        <div class="tooltip">Pressure chamber</div>
+      </div>
+    </div>
+
+  </div>
+</div>
